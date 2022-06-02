@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 from app_home import run_home
 from PIL import Image
 def main() :
-    
+    st.set_page_config(layout="wide")
     st.title('Netflix')
     menu = ['Home', 'EDA']
     with st.sidebar:
