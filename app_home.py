@@ -5,8 +5,8 @@ from youtubesearchpython import VideosSearch
 import numpy as np
 from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics.pairwise import cosine_similarity
-import plotly.graph_objects as po
 import plotly.graph_objs as go
+
 # Youtube 동영상 검색후 영상 url 가져오기
 def videosSearch(search):
     videosSearch = VideosSearch('Netflix {}'.format(search), 
@@ -39,9 +39,23 @@ def recommended_movie(title):
 
 # 프로그램 정보 출력
 def movie_info(col1, col2, df, title) :
+    age_dict = {'TV-MA' : '17세 미만의 어린이 혹은 청소년한테 부적절한 프로그램', 
+            'R' : '수위가 매우 높은 성인영화. 18세 미만 관람불가', 
+            'PG' : '전체 관람가지만, 폭력성이 존재하므로 어린이의 경우 보호자의 지도가 요구', 
+            'TV-14' : '14세 미만의 어린이 혹은 청소년이 시청하려면 보호자 지도가 권장되는 프로그램', 
+            'G' : '전체 관람가', 
+            'PG-13' : '전체 관람가지만, 부모의 주의가 요구되며 13세 미만에게는 보호자 동반이 권고된다', 
+            'Unknown' : '관람 등급이 등록되지 않았습니다.', 
+            'TV-PG' : '어린이가 시청하려면 보호자 지도가 권장되는 프로그램' ,
+            'TV-Y' : '영유아를 위한 프로그램', 
+            'TV-G' : '모든 연령이 시청할 수 있는 프로그램. 다만 어린이를 대상으로 하지는 않았다', 
+            'TV-Y7' : '7세 이상의 어린이를 위한 프로그램', 
+            'NC-17' : '17세 이하 어린이 관람 불가 프로그램'}
     with col1 :
-        st.subheader('나이 제한')
-        st.write(df.loc[df['title'] == title,'age_certification'].values[0])
+        st.subheader('관람 등급')
+        age_class = df.loc[df['title'] == title,'age_certification'].values[0]
+        st.text(age_class)
+        st.text(age_dict[age_class])
             
         st.subheader('장르')
         genre_list = df.loc[df['title'] == title,
