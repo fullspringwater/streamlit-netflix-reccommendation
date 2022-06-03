@@ -4,9 +4,12 @@ from streamlit_option_menu import option_menu
 from app_home import run_home
 from PIL import Image
 def main() :
-    st.set_page_config(layout="wide")
-    
     logo = Image.open('data/logo.jpg')
+
+    st.set_page_config(page_title="Netflix Recommendation",
+        page_icon=logo,
+        layout="wide")
+    
     col1, col2 = st.columns([5,9])
     with col1 :
         st.title('Netflix 검색 및 추천')
