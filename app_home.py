@@ -69,7 +69,7 @@ def movie_info(col1, col2, df, title) :
         country_list = country_list.replace('[','').replace(']','').replace('\'','')
         st.write(country_list)
 
-        st.subheader('줄거리')
+        st.subheader('설명')
         st.write(df.loc[df['title'] == title,'description'].values[0])
 
     with col2 :
@@ -124,7 +124,8 @@ def avg_choice_chart(df, title) :
                         )]
                     )
     fig.update_layout(title='<b>전체평균 VS 선택한 타이틀</b>',
-                    width=1000, height=500)                
+                    width=1000, height=500, template = "plotly_dark",
+                    font = dict(family = "PT Sans", size = 20))                
     st.plotly_chart(fig)
 
 
