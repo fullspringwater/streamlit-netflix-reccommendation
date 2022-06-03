@@ -131,8 +131,7 @@ def avg_choice_chart(df, title) :
 def run_home() :
     df= pd.read_csv('data/new_data.csv', index_col=0)
     df = df.drop_duplicates(['title'], keep = 'first')
-
-    st.dataframe(df)
+     
     genres = ['Anything','Reality','European','Music','Family','Animation',
         'Comedy','Romance','Action','Thriller','Horror','Scifi',
         'History','Western','Crime','Documentation','Drama',
