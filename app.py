@@ -7,6 +7,7 @@ def main() :
     st.set_page_config(layout="wide")
     st.title('Netflix 검색 및 추천')
     run_home() 
+    print(st.__version__)
 
 if __name__=='__main__' :
     main()
