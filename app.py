@@ -7,7 +7,7 @@ def main() :
     st.set_page_config(layout="wide")
     
     logo = Image.open('data/logo.jpg')
-    col1, col2 = st.columns([2,6])
+    col1, col2 = st.columns([5,9])
     with col1 :
         st.title('Netflix 검색 및 추천')
     with col2 :
