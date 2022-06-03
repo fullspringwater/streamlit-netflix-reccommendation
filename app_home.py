@@ -88,18 +88,19 @@ def movie_info(col1, col2, df, title) :
         st.subheader('TMDB 점수')
         st.text(df.loc[df['title'] == title,'tmdb_score'].values[0])
 
+# 차트 출력함수 
 def avg_choice_chart(df, title) :
     imdb_scores = [round(df['imdb_score'].mean(),1), df.loc[df['title'] == title, 'imdb_score'].values[0] ]
     tmdb_popularity = [round(df['tmdb_popularity'].mean(),1), df.loc[df['title'] == title, 'tmdb_popularity'].values[0] ]
     tmdb_scores = [round(df['tmdb_score'].mean(),1), df.loc[df['title'] == title, 'tmdb_score'].values[0] ]
     runtimes = [round(df['runtime'].mean()), df.loc[df['title'] == title, 'runtime'].values[0] ]
 
+
     df_score_runtime = pd.DataFrame({'movie' : ['average', 'choice'],
              'imdb_score' : imdb_scores,
               'tmdb_popularity' : tmdb_popularity,
               'tmdb_score' : tmdb_scores,
               'runtime' : runtimes} )
-    
     fig = go.Figure(data=[go.Bar(
     name = 'imdb_score',
     x = df_score_runtime['movie'].values.tolist(),
@@ -131,9 +132,41 @@ def run_home() :
     df= pd.read_csv('data/new_data.csv', index_col=0)
     df = df.drop_duplicates(['title'], keep = 'first')
 
-    search = st.text_input('제목 검색')
-    search_result = df.loc[df['title'].str.lower().str.contains(search.lower(), na=False)]
-    search_list = search_result['title'].values
+    st.dataframe(df)
+    genres = ['Anything','Reality','European','Music','Family','Animation',
+        'Comedy','Romance','Action','Thriller','Horror','Scifi',
+        'History','Western','Crime','Documentation','Drama',
+        'Sport','Fantasy','War']
+    
+    col01, col02 = st.columns(2)
+    with col01 :
+        search = st.text_input('제목 검색')
+        genre_choice = st.selectbox('장르 선택', genres)
+    with col02 :
+        type_choice = st.radio('타입 선택',
+        ['Anything', 'Movie', 'Show'])
+        print(type_choice)
+    
+    if genre_choice == 'Anything' and type_choice == 'Anything':
+        search_result = df.loc[df['title'].str.lower().str.contains(search.lower(), na=False)]
+        search_list = search_result['title'].values
+
+    elif genre_choice == 'Anything' and type_choice != 'Anything':
+        search_result = df.loc[df['title'].str.lower().str.contains(search.lower(), na=False) &
+                            df['type'].str.contains(type_choice.upper())]
+        search_list = search_result['title'].values
+
+    elif genre_choice != 'Anything' and type_choice == 'Anything':
+        search_result = df.loc[df['title'].str.lower().str.contains(search.lower(), na=False) &
+                            df['genres'].str.contains(genre_choice.lower())]
+        search_list = search_result['title'].values
+    else :
+        search_result = df.loc[df['title'].str.lower().str.contains(search.lower(), na=False) &
+                            df['genres'].str.contains(genre_choice.lower())&
+                            df['type'].str.contains(type_choice.upper())]
+        search_list = search_result['title'].values
+
+
 
 
     if len(search_list) != 0 :
