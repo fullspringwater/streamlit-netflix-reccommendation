@@ -48,15 +48,15 @@ pip install joblib
 ## 💼 Recommendation System
 
 ✅ KNN을 이용해 가장 거리가 가장 가까운 (유사도가 가장 높은) 5개를 뽑아 추천하도록 했습니다.
-![netflix_app_begin](https://user-images.githubusercontent.com/105832330/172292297-fabb8eb7-6486-4965-b65d-2dabba0c9783.gif)
-
+![knn](https://user-images.githubusercontent.com/105832330/172280125-12d3f63b-3eea-48b3-ae72-bc94da8070c4.png)
 
 
 
 ## 💿 Usage
 
 ### 실행하기
-![netflix_app_begin](https://user-images.githubusercontent.com/105832330/172275238-ffbab2d0-c37a-4ca4-8ddf-ab2db13ece13.gif)
+![netflix_app_begin](https://user-images.githubusercontent.com/105832330/172292297-fabb8eb7-6486-4965-b65d-2dabba0c9783.gif)
+
 
 ### 테스트
 ![netflix_app_test](https://user-images.githubusercontent.com/105832330/172278582-f52e660b-2491-492b-a061-2fd570e59677.gif)
