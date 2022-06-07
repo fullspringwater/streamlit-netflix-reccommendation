@@ -22,3 +22,4 @@ pip install youtube-search-python
 ```
 pip install joblib
 ```
+![netflix_app_begin](https://user-images.githubusercontent.com/105832330/172275238-ffbab2d0-c37a-4ca4-8ddf-ab2db13ece13.gif)
