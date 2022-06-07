@@ -11,8 +11,8 @@
 https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=titles.csv
 
  - **ID** :  타이틀 ID
- - **title** : 제목의 이름
- - **show type** : TV 쇼 또는 영화
+ - **title** : 제목
+ - **show type** : TV  또는 영화
  - **description** : 간략한 설명
  - **release year** : 출시 연도
  - **age certification** : 연령 인증
