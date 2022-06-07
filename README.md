@@ -8,7 +8,7 @@
 
 ## 📘 Dataset Source
 
-https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=titles.csv
+ 👉 출처 : https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=titles.csv
 
  - **ID** :  타이틀 ID
  - **title** : 제목
