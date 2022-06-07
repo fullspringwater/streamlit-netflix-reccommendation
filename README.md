@@ -20,7 +20,7 @@ https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=
  - **genres** : 장르 목록입니다.
  - **production countries** : 타이틀을 제작한 국가 목록
  - **seasons** : SHOW인 경우 시즌 수
- - **IMDB**  ID: IMDB의 타이틀
+ - **IMDB ID** : IMDB의 타이틀
  - **IMDB Score** :  IMDB 점수.
  - **IMDB Votes** : IMDB 투표수
  - **TMDB Popularity** :  TMDB 인기도
