@@ -1,4 +1,4 @@
-<h1 align="center">streamlit-netflix-recommendation-app</h1>
+<h1 align="center"> 🙌 streamlit-netflix-recommendation-app</h1>
 
 ## 📃 Description
 
