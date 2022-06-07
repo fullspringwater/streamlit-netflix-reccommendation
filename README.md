@@ -4,10 +4,27 @@
 - 넷플릭스 영상 제목, 장르, 타입을 선택, 검색하여 그에 해당하는 프로그램에 대한 정보를 볼 수 있다.
 - 해당 프로그램와 유사한 다른 영상들도 추천 해준다.
 
+## Dataset Source
+https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=titles.csv
+ - ID:  타이틀 ID
+ - title: 제목의 이름
+ - show type: TV 쇼 또는 영화
+ - description: 간략한 설명
+ - release year: 출시 연도
+ - age certification: 연령 인증
+ - runtime: 에피소드(SHOW) 또는 영화의 길이
+ - genres: 장르 목록입니다.
+ - production countries: 타이틀을 제작한 국가 목록
+ - seasons: SHOW인 경우 시즌 수
+ - IMDB ID: IMDB의 타이틀 I
+ - IMDB Score:  IMDB 점수.
+ - IMDB Votes: IMDB 투표수
+ - TMDB Popularity:  TMDB 인기도
+ - TMDB Score:  TMDB 점수
+ - 
 ##
 ## Environment
 - Python 3.7
-
 
 ##
 ## Prerequisite
