@@ -26,12 +26,12 @@ https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=
  - **TMDB Popularity** :  TMDB 인기도
  - **TMDB Score** :  TMDB 점수
 ##
-## 🔨 Environment
+## 🛠 Environment
 
 ✅ Python 3.7
 
 ##
-## 📝 Prerequisite
+## 🔨 Prerequisite
 
 ```
 pip install streamlit
