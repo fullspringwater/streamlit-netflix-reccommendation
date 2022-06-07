@@ -48,6 +48,8 @@ pip install joblib
 
 
 ## Usage
+실행하기
 ![netflix_app_begin](https://user-images.githubusercontent.com/105832330/172275238-ffbab2d0-c37a-4ca4-8ddf-ab2db13ece13.gif)
+
 
 ![netflix_app_test](https://user-images.githubusercontent.com/105832330/172278582-f52e660b-2491-492b-a061-2fd570e59677.gif)
