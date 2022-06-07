@@ -168,8 +168,7 @@ def run_home() :
 
 
 
-
-    if len(search_list) != 0 :
+    if len(search_list) != 0:
         selected = st.selectbox('검색 결과 리스트', search_list)
         st.markdown("---")
         st.markdown(""" <style> .font {
@@ -194,7 +193,7 @@ def run_home() :
         recommend_list = recommended_movies['Title'].values
         recommend_choice = st.selectbox('추천 리스트', recommend_list)
 
-        if st.button('선택한 프로그램 정보') :
+        if st.button('선택한 프로그램 정보', key = 1) :
             
             # 추천 프로그램 정보 출력
             st.markdown(""" <style> .font {
@@ -220,7 +219,8 @@ def run_home() :
 
             # 차트 출력
             avg_choice_chart(df, recommend_choice)
-
+    else :
+        st.warning('검색결과가 없습니다. 다시 검색해주세요')
 
 
 
