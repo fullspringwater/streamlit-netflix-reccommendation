@@ -2,8 +2,8 @@
 
 ## Description
 ✅ 넷플릭스 영상 제목, 장르, 타입을 선택, 검색하여 그에 해당하는 프로그램에 대한 정보를 볼 수 있습니다.
-<>
-✅ 해당 프로그램와 유사한 다른 영상들도 추천 해줍니다.
+
+✅ 해당 프로그램과 비슷한 영상을 추천해 보여줍니다.
 
 ## Dataset Source
 https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies?select=titles.csv
