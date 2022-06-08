@@ -31,7 +31,7 @@ def recommended_movie(title):
     kn = joblib.load('data/kn.pkl')
 
     _, indices = kn.kneighbors(np.array(X.loc[title]).reshape(1,144))
-    nearest_title = [y.loc[i][0] for i in indices.flatten()][1:]
+    nearest_title = [y.iloc[i][0] for i in indices.flatten()][1:]
     sim_rates = []
 
     for nt in nearest_title :
