@@ -10,7 +10,7 @@ import plotly.graph_objs as go
 # Youtube 동영상 검색후 영상 출력
 def videosSearch(search):
     videosSearch = VideosSearch('Netflix {}'.format(search), 
-                                    limit = 2)
+                                    limit = 3)
     j = 5
     for i in range(len(videosSearch.result()['result'])) :
         if search.lower() in videosSearch.result()['result'][i]['title'].lower() :
