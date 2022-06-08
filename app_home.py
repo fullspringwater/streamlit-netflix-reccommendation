@@ -25,6 +25,7 @@ def videosSearch(search):
 
 
 # 추천 시스템
+# indices = 가장 가까운 요소들
 def recommended_movie(title):
     X = pd.read_csv('data/X.csv', index_col=0)
     y = pd.read_csv('data/y.csv', index_col=0)
@@ -147,6 +148,7 @@ def run_home() :
         'History','Western','Crime','Documentation','Drama',
         'Sport','Fantasy','War']
     
+    # Search
     col01, col02 = st.columns(2)
     with col01 :
         search = st.text_input('제목 검색')
@@ -176,7 +178,7 @@ def run_home() :
         search_list = search_result['title'].values
 
 
-
+    # search_list 가 비어있지 않을때 
     if len(search_list) != 0:
         selected = st.selectbox('검색 결과 리스트', search_list)
         st.markdown("---")
@@ -202,6 +204,7 @@ def run_home() :
         recommend_list = recommended_movies['Title'].values
         recommend_choice = st.selectbox('추천 리스트', recommend_list)
 
+        # 버튼을 누를 때
         if st.button('선택한 프로그램 정보', key = 1) :
             
             # 추천 프로그램 정보 출력
