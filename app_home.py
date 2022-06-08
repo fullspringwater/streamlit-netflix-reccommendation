@@ -1,143 +1,11 @@
 import streamlit as st
 import pandas as pd
-import joblib
-from youtubesearchpython import VideosSearch
-import numpy as np
-from sklearn.neighbors import NearestNeighbors
-from sklearn.metrics.pairwise import cosine_similarity
-import plotly.graph_objs as go
-
-# Youtube 동영상 검색후 영상 출력
-def videosSearch(search):
-    videosSearch = VideosSearch('Netflix {}'.format(search), 
-                                    limit = 3)
-    j = 5
-    for i in range(len(videosSearch.result()['result'])) :
-        if search.lower() in videosSearch.result()['result'][i]['title'].lower() :
-            print(videosSearch.result()['result'][i]['link'])
-            j = i
-            break                                
-    if j != 5 :
-        video_url = videosSearch.result()['result'][j]['link']
-        st.video(video_url)
-    else : 
-        st.info('관련 영상을 찾을 수 없습니다.')
 
 
-# 추천 시스템
-# indices = 가장 가까운 요소들
-def recommended_movie(title):
-    X = pd.read_csv('data/X.csv', index_col=0)
-    y = pd.read_csv('data/y.csv', index_col=0)
-    kn = joblib.load('data/kn.pkl')
-
-    _, indices = kn.kneighbors(np.array(X.loc[title]).reshape(1,144))
-    nearest_title = [y.iloc[i][0] for i in indices.flatten()][1:]
-    sim_rates = []
-
-    for nt in nearest_title :
-        sim = cosine_similarity(np.array(X.loc[title]).reshape(1,144),
-                                    np.array(X.loc[nt]).reshape(1,144)).flatten()
-        sim_rates.append(sim[0])
-        
-    recommended_movies = pd.DataFrame({
-                            'Title' : nearest_title,                                 
-                            'Similarity' : sim_rates} )
-    recommended_movies.sort_values('Similarity', ascending =False)
-
-    return recommended_movies
-
-# 프로그램 정보 출력
-def movie_info(col1, col2, df, title) :
-    age_dict = {'TV-MA' : '17세 미만의 어린이 혹은 청소년한테 부적절한 프로그램', 
-            'R' : '수위가 매우 높은 성인영화. 18세 미만 관람불가', 
-            'PG' : '전체 관람가지만, 폭력성이 존재하므로 어린이의 경우 보호자의 지도가 요구', 
-            'TV-14' : '14세 미만의 어린이 혹은 청소년이 시청하려면 보호자 지도가 권장되는 프로그램', 
-            'G' : '전체 관람가', 
-            'PG-13' : '전체 관람가지만, 부모의 주의가 요구되며 13세 미만에게는 보호자 동반이 권고된다', 
-            'Unknown' : '관람 등급이 등록되지 않았습니다.', 
-            'TV-PG' : '어린이가 시청하려면 보호자 지도가 권장되는 프로그램' ,
-            'TV-Y' : '영유아를 위한 프로그램', 
-            'TV-G' : '모든 연령이 시청할 수 있는 프로그램. 다만 어린이를 대상으로 하지는 않았다', 
-            'TV-Y7' : '7세 이상의 어린이를 위한 프로그램', 
-            'NC-17' : '17세 이하 어린이 관람 불가 프로그램'}
-    with col1 :
-        st.subheader('관람 등급')
-        age_class = df.loc[df['title'] == title,'age_certification'].values[0]
-        st.text(age_class)
-        st.text(age_dict[age_class])
-            
-        st.subheader('장르')
-        genre_list = df.loc[df['title'] == title,
-                            'genres'].values[0]
-        genre_list = genre_list.replace('[','').replace(']','').replace('\'','')
-        st.text(genre_list)
-
-        st.subheader('제작국가')
-        country_list = df.loc[df['title'] == title,
-                            'production_countries'].values[0]
-        country_list = country_list.replace('[','').replace(']','').replace('\'','')
-        st.write(country_list)
-
-        st.subheader('설명')
-        st.write(df.loc[df['title'] == title,'description'].values[0])
-
-    with col2 :
-        st.subheader('출시년도')
-        st.text('{}년'.format(df.loc[df['title'] == title,'release_year'].values[0]))
-
-        st.subheader('러닝 타임')
-        st.text('{}분'.format(df.loc[df['title'] == title,'runtime'].values[0]))
-
-        
-
-        st.subheader('IMDB 점수')
-        st.text(df.loc[df['title'] == title,'imdb_score'].values[0])
-        st.subheader('TMDB 인기도')
-        st.text(df.loc[df['title'] == title,'tmdb_popularity'].values[0])
-        st.subheader('TMDB 점수')
-        st.text(df.loc[df['title'] == title,'tmdb_score'].values[0])
-
-# 차트 출력함수 
-def avg_choice_chart(df, title) :
-    imdb_scores = [round(df['imdb_score'].mean(),1), df.loc[df['title'] == title, 'imdb_score'].values[0] ]
-    tmdb_popularity = [round(df['tmdb_popularity'].mean(),1), df.loc[df['title'] == title, 'tmdb_popularity'].values[0] ]
-    tmdb_scores = [round(df['tmdb_score'].mean(),1), df.loc[df['title'] == title, 'tmdb_score'].values[0] ]
-    runtimes = [round(df['runtime'].mean()), df.loc[df['title'] == title, 'runtime'].values[0] ]
-
-
-    df_score_runtime = pd.DataFrame({'movie' : ['average', 'choice'],
-             'imdb_score' : imdb_scores,
-              'tmdb_popularity' : tmdb_popularity,
-              'tmdb_score' : tmdb_scores,
-              'runtime' : runtimes} )
-    fig = go.Figure(data=[go.Bar(
-    name = 'imdb_score',
-    x = df_score_runtime['movie'].values.tolist(),
-    y = df_score_runtime['imdb_score'].values.tolist()
-                        ),
-                       go.Bar(
-    name = 'tmdb_score',
-    x = df_score_runtime['movie'].values.tolist(),
-    y = df_score_runtime['tmdb_score'].values.tolist()
-                       ),
-                        go.Bar(
-    name = 'tmdb_popularity',
-    x = df_score_runtime['movie'].values.tolist(),
-    y = df_score_runtime['tmdb_popularity'].values.tolist()
-                        ),
-                       go.Bar(
-    name = 'runtime',
-    x = df_score_runtime['movie'].values.tolist(),
-    y = df_score_runtime['runtime'].values.tolist()
-
-                        )]
-                    )
-    fig.update_layout(title='<b>전체평균 VS 선택한 타이틀</b>',
-                    width=1000, height=500, template = "plotly_dark",
-                    font = dict(family = "PT Sans", size = 20))                
-    st.plotly_chart(fig)
-
+from avg_vs_choice_chart import avg__vs_choice_chart
+from movie_info import movie_info
+from videosSearch import videosSearch
+from recomemended_movies import recommended_movie
 
 def run_home() :
     df= pd.read_csv('data/new_data.csv', index_col=0)
@@ -196,7 +64,7 @@ def run_home() :
         # 정보들 출력
         movie_info(col1, col2, df, selected)
 
-        avg_choice_chart(df, selected)
+        avg__vs_choice_chart(df, selected)
         st.markdown('---')
 
         # 추천프로그램 데이터 프레임 가져오기
@@ -230,7 +98,7 @@ def run_home() :
             movie_info(col3, col4, df, recommend_choice)
 
             # 차트 출력
-            avg_choice_chart(df, recommend_choice)
+            avg__vs_choice_chart(df, recommend_choice)
     else :
         st.warning('검색결과가 없습니다. 다시 검색해주세요')
 
