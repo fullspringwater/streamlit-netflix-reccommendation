@@ -45,6 +45,14 @@ pip install youtube-search-python
 pip install joblib
 ```
 
+```
+pip install plotly==5.8.0
+```
+
+```
+pip install scikit-learn
+```
+
 ## 💼 Recommendation System
 
 ✅ KNN을 이용해 가장 거리가 가장 가까운 (유사도가 가장 높은) 5개를 뽑아 추천하도록 했습니다.
