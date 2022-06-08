@@ -7,13 +7,22 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics.pairwise import cosine_similarity
 import plotly.graph_objs as go
 
-# Youtube 동영상 검색후 영상 url 가져오기
+# Youtube 동영상 검색후 영상 출력
 def videosSearch(search):
     videosSearch = VideosSearch('Netflix {}'.format(search), 
                                     limit = 2)
-    video_url = videosSearch.result()['result'][0]['link']
+    j = 5
+    for i in range(len(videosSearch.result()['result'])) :
+        if search.lower() in videosSearch.result()['result'][i]['title'].lower() :
+            print(videosSearch.result()['result'][i]['link'])
+            j = i
+            break                                
+    if j != 5 :
+        video_url = videosSearch.result()['result'][j]['link']
+        st.video(video_url)
+    else : 
+        st.info('관련 영상을 찾을 수 없습니다.')
 
-    return video_url
 
 # 추천 시스템
 def recommended_movie(title):
@@ -179,7 +188,7 @@ def run_home() :
         # 동영상 출력
         col_video1, _ = st.columns(2)
         with col_video1 :
-            st.video(videosSearch(selected))
+            videosSearch(selected)
         
         col1, col2 = st.columns([5,3])
         # 정보들 출력
@@ -205,7 +214,7 @@ def run_home() :
             # 동영상 출력
             col_video2, _ = st.columns(2)
             with col_video2 :
-                st.video(videosSearch(recommend_choice))
+                videosSearch(recommend_choice)
                                     
             col3, col4 = st.columns([5,3])
 
