@@ -1,6 +1,4 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
-
 from app_home import run_home
 from PIL import Image
 def main() :
