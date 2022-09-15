@@ -93,4 +93,4 @@ def videosSearch(search):
 ![netflix_app_test](https://user-images.githubusercontent.com/105832330/172278582-f52e660b-2491-492b-a061-2fd570e59677.gif)
 
 ### Url
-http://ec2-3-39-230-35.ap-northeast-2.compute.amazonaws.com:8503/
+http://ec2-13-125-205-104.ap-northeast-2.compute.amazonaws.com:8503/
